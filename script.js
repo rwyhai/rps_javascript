@@ -3,11 +3,18 @@
 let randomNumber = Math.floor(Math.random()*3); //0-rock 1-paper 2-scissors
 
 
-const rpsButton = document.querySelector('button');
-const rpsField = document.querySelector('#input');
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
 const winCondition = document.querySelector('#winCondition')
 const computerPick = document.querySelector('#computerPick')
 const yourPick = document.querySelector('#yourPick')
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', function(e) {console.log(e);checkRPS(e)})
+});
 
 let playerPick;
 let enemyPick;
@@ -27,8 +34,8 @@ function checkEnemyPick() {
     return enemyPick;
 };
 
-function checkRPS() {
-    let playerPick = rpsField.value;
+function checkRPS(event) {
+    let playerPick = event.target.textContent;
     computerPick.textContent = '';
     yourPick.textContent = '';
     winCondition.textContent = '';
@@ -80,5 +87,3 @@ function checkRPS() {
     //reset randomNumber
     randomNumber = Math.floor(Math.random()*3);
 };
-
-rpsButton.addEventListener('click', checkRPS);
