@@ -18,6 +18,8 @@ buttons.forEach((button) => {
 
 let playerPick;
 let enemyPick;
+let playerPoints = 0;
+let enemyPoints = 0;
 
 function checkEnemyPick() {
     switch(randomNumber) {
@@ -54,28 +56,34 @@ function checkRPS(event) {
                 winCondition.textContent = 'It\'s a tie';
                 break;
             case 1: // loss
+                enemyPoints += 1;
                 winCondition.textContent = 'You\'ve lost';
                 break;
             case 2: // win
+                playerPoints += 1;
                 winCondition.textContent = 'You\'ve won';
         };
     } else if (playerPick === "paper") {
         switch(randomNumber) {
             case 0: // win
+                playerPoints += 1;
                 winCondition.textContent = 'It\'s a win';
                 break;
             case 1: // tie
                 winCondition.textContent = 'You\'ve tied';
                 break;
             case 2: // loss
+                enemyPoints += 1;
                 winCondition.textContent = 'You\'ve lost';
         };
     } else if (playerPick === "scissors") {
         switch(randomNumber) {
             case 0: // lose
+                enemyPoints += 1;
                 winCondition.textContent = 'It\'s a lost';
                 break;
             case 1: // win
+                playerPoints += 1;
                 winCondition.textContent = 'You\'ve won';
                 break;
             case 2: // tie
@@ -85,5 +93,21 @@ function checkRPS(event) {
         winCondition.textContent = "Something went wrong";
     };
     //reset randomNumber
+    playerScore.textContent = playerPoints;
+    enemyScore.textContent = enemyPoints;
     randomNumber = Math.floor(Math.random()*3);
 };
+
+const divScore = document.createElement('div');
+divScore.style.background = "blue";
+const playerScore = document.createElement('span');
+const scoreDivider = document.createElement('span');
+scoreDivider.textContent = " - ";
+const enemyScore = document.createElement('span');
+const results = document.querySelector('#results');
+
+
+results.appendChild(divScore);
+divScore.appendChild(playerScore);
+divScore.appendChild(scoreDivider);
+divScore.appendChild(enemyScore);
